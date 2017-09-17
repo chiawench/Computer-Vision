@@ -20,6 +20,10 @@ def mag(im, sigma):
     #imgmag = 255 - numpy.sqrt(imgx ** 2 + imgy ** 2)
     return mag
 
+def arc(im):
+    arc = zeros(im.shape)
+    arc = arctan2(imgy, imgx) * 180 / pi
+    return arc
 
 
 
@@ -32,21 +36,24 @@ gray()
 sigma = 2
 
 
-subplot(1, 4, 1)
+subplot(1, 5, 1)
 axis('off')
 imshow(im)
 imgx=imx(im, sigma)
-subplot(1, 4, 2)
+subplot(1, 5, 2)
 axis('off')
 imshow(imgx)
 imgy=imy(im, sigma)
-subplot(1, 4, 3)
+subplot(1, 5, 3)
 axis('off')
 imshow(imgy)
 imgmag=mag(im, sigma)
-subplot(1, 4, 4)
+subplot(1, 5, 4)
 axis('off')
 imshow(imgmag)
-
+arc = arc(im)
+subplot(1, 5, 5)
+axis('off')
+imshow(arc)
 
 show()
