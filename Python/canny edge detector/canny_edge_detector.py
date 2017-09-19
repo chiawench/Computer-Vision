@@ -30,30 +30,45 @@ def arc(im):
 
 
 im = array(Image.open('test.jpg').convert('L'))
-figure()
-gray()
-
 sigma = 2
 
 
-subplot(1, 5, 1)
-axis('off')
-imshow(im)
 imgx=imx(im, sigma)
-subplot(1, 5, 2)
-axis('off')
 imshow(imgx)
 imgy=imy(im, sigma)
-subplot(1, 5, 3)
-axis('off')
 imshow(imgy)
 imgmag=mag(im, sigma)
-subplot(1, 5, 4)
-axis('off')
 imshow(imgmag)
 arc = arc(im)
-subplot(1, 5, 5)
-axis('off')
-imshow(arc)
+(x,y) = arc.shape
+print(x)
+print(y)
 
-show()
+print(arc[:,1])
+
+for i in range(x):
+    for j in range(y):
+             if arc[i,j] >= -22.5 and arc[i,j] < 22.5 :
+                 arc[i, j] = 0
+             elif arc[i,j] >= 22.5 and arc[i,j] < 67.5 :
+                 arc[i, j] = 45
+             elif arc[i, j] >= 67.5 and arc[i, j] < 112.5:
+                 arc[i, j] = 90
+             elif arc[i, j] >= 112.5 and arc[i, j] < 157.5:
+                 arc[i, j] = 135
+             elif arc[i, j] >= 157.5:
+                 arc[i, j] = 180
+             elif arc[i, j] <= -22.5 and arc[i, j] > -67.5:
+                 arc[i, j] = -45
+             elif arc[i, j] <= -67.5 and arc[i, j] > -112.5:
+                 arc[i, j] = -90
+             elif arc[i, j] <= -112.5 and arc[i, j] > -157.5:
+                 arc[i, j] = -135
+             else:
+                 arc[i,j] = 180
+
+
+
+print(arc[:,1])
+
+
