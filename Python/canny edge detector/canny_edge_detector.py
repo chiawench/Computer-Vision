@@ -74,22 +74,22 @@ for i in range(1,x-1):
     for j in range(1,y-1):
         if(arc[i,j] == 0 or arc[i,j] == 180) :
             if(imgmag[i,j] >imgmag[i,j-1] and imgmag[i,j] > imgmag[i,j+1]) :
-                nms[i,j] = 128
+                nms[i,j] = imgmag[i,j]
             else:
                 nms[i, j] = 0
         if (arc[i, j] == 45 or arc[i, j] == -135):
             if (imgmag[i, j] > imgmag[i-1, j + 1] and imgmag[i, j] > imgmag[i+1, j - 1]):
-                nms[i, j] = 128
+                nms[i, j] = imgmag[i,j]
             else:
                 nms[i, j] = 0
         if (arc[i, j] == 90 or arc[i, j] == -90):
             if (imgmag[i, j] > imgmag[i-1, j ] and imgmag[i, j] > imgmag[i+1, j]):
-                nms[i, j] = 128
+                nms[i, j] = imgmag[i,j]
             else:
                 nms[i, j] = 0
         if (arc[i, j] == 135 or arc[i, j] == -45):
             if (imgmag[i, j] > imgmag[i-1, j - 1] and imgmag[i, j] > imgmag[i+1, j + 1]):
-                nms[i, j] = 128
+                nms[i, j] = imgmag[i,j]
             else:
                 nms[i, j] = 0
 
