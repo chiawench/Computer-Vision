@@ -25,4 +25,23 @@ def get_features(imagename):
     img1 = cv2.resize(imagename, (0, 0), fx=fx, fy=fy, interpolation=cv2.INTER_CUBIC)
     ndimage.filters.gaussian_filter(img1, math.sqrt(init_sigma *init_sigma - 1))
     min_size = min(img1.shape)
-    octv = math.floor(math.log(min_size, 2) - 2)
+    octvs = math.floor(math.log(min_size, 2) - 2)
+    gauss_pyr = list()
+    gimg_size = np.ones((octvs, 2), dtype=np.int)
+    gimg_size[0, 0] = round(img1.shape[0])
+    gimg_size[0, 1] = round(img1.shape[1])
+    for i in range(0, octvs - 1):
+        if (i != 0):
+            gimg_size[i, :] = [round(gauss_pyr[i - 1].shape[0] / 2), round(gauss_pyr[i - 1].shape[1] / 2)]
+        gauss_pyr.append(np.zeros((gimg_size[i, 0], gimg_size[i, 1], s + 3)))
+
+    for i in range(0, octvs - 1):
+        for j in range(0, s+2) :
+            if( i==0 and j==0 ):
+                gauss_pyr
+                gauss_pyr[i,:,:, j] = img1
+            elif j==0:
+                gauss_pyr[i, :, :, j] = cv2.resize(gauss_pyr[i-1,:,:, j], (0, 0), fx=0.5, fy=0.5, interpolation=cv2.INTER_CUBIC)
+            else:
+                gauss_pyr[i, :, :, j] = ndimage.filters.gaussian_filter(gauss_pyr[i, :, :, j-1],sigma[j] )
+
