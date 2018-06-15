@@ -38,10 +38,9 @@ def get_features(imagename):
     for i in range(0, octvs - 1):
         for j in range(0, s+2) :
             if( i==0 and j==0 ):
-                gauss_pyr
-                gauss_pyr[i,:,:, j] = img1
+                gauss_pyr[i][:, :, j] = img1
             elif j==0:
-                gauss_pyr[i, :, :, j] = cv2.resize(gauss_pyr[i-1,:,:, j], (0, 0), fx=0.5, fy=0.5, interpolation=cv2.INTER_CUBIC)
+                gauss_pyr[i][:,:,j] = cv2.resize(gauss_pyr[i-1][:,:,s+1], (0, 0), fx=0.5, fy=0.5, interpolation=cv2.INTER_CUBIC)
             else:
-                gauss_pyr[i, :, :, j] = ndimage.filters.gaussian_filter(gauss_pyr[i, :, :, j-1],sigma[j] )
+                gauss_pyr[i][:, :, j] = ndimage.filters.gaussian_filter(gauss_pyr[i][:, :, j-1],sigma[0,j] )
 

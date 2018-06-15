@@ -41,17 +41,23 @@ for i in range(0, octvs-1):
     gauss_pyr.append(np.zeros((gimg_size[i,0],gimg_size[i,1],s+3)))
 
 print(gauss_pyr[0][:,:,0].shape)
+
 for i in range(0, octvs - 1):
     for j in range(0, s+2) :
-        if( i==0 and j==0 ):
+       if( i==0 and j==0 ):
             gauss_pyr[i][:, :, j] = img1
-        elif j==0:
-            gauss_pyr[i][:,:,j] = cv2.resize(gauss_pyr[i-1][:,:,j], (0, 0), fx=0.5, fy=0.5, interpolation=cv2.INTER_CUBIC)
-        else:
+       elif j==0:
+           gauss_pyr[i][:,:,j] = cv2.resize(gauss_pyr[i-1][:,:,s+1], (0, 0), fx=0.5, fy=0.5, interpolation=cv2.INTER_CUBIC)
+       else:
             gauss_pyr[i][:, :, j] = ndimage.filters.gaussian_filter(gauss_pyr[i][:, :, j-1],sigma[0,j] )
-#print(gauss_pyr[6][0][0][1])
-#print(gauss_pyr[6].shape[1])
-#print(gauss_pyr[6].shape[2])
+
+
+
+print(img1[0,25])
+print(gauss_pyr[0][0,25,1])
+print(gauss_pyr[0].shape[0])
+print(gauss_pyr[0].shape[1])
+print(gauss_pyr[0].shape[2])
 #print(octv)
 #figure()
 #subplot(121)
