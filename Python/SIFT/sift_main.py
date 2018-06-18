@@ -51,6 +51,18 @@ for i in range(0, octvs - 1):
        else:
             gauss_pyr[i][:, :, j] = ndimage.filters.gaussian_filter(gauss_pyr[i][:, :, j-1],sigma[0,j] )
 
+dog_pyr = list()
+for i in range(0, octvs - 1):
+    dog_pyr.append(np.zeros((gimg_size[i, 0], gimg_size[i, 1], s + 2)))
+    for j in range(0, s+1) :
+        dog_pyr[i][:, :, j] = gauss_pyr[i][:,:,j+1]-gauss_pyr[i][:,:,j]
+
+img_border = 5
+max_interp_steps = 5
+contr_thr = 0.04
+curv_thr = 10
+prelim_contr_thr = 0.5*contr_thr/intvls
+
 
 
 print(img1[0,25])
